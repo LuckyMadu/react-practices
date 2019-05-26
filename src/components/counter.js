@@ -17,6 +17,8 @@ function Counter(props) {
 
   return (
     <div>
+      {props.children}
+      {/*  <h4>Counter #{props.id}</h4> */}
       <span className={getBadgeClasses()}>{formatCount()}</span>
       <button
         onClick={() => handleIncrement}
