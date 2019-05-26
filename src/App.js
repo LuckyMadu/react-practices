@@ -1,28 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 
 function App() {
-  const state = {
-    count: 1,
-    tags: []
-  };
+  const [count, setCount] = useState(1);
 
-  function renderTags() {
-    if (state.tags.length === 0) return <p>There are no tags!</p>;
-
-    return (
-      <ul>
-        {state.tags.map(tag => (
-          <li key={tag}>{tag}</li>
-        ))}
-      </ul>
-    );
+  function formatCount() {
+    return count === 0 ? "zero" : count;
   }
+
+  const handleIncrement = () => {
+    setCount(count + 1);
+  };
   return (
     <div>
-      {state.tags.length === 0 && "Please create a new tag!"}
-      {renderTags()}
+      <span className={getBadgeClasses()}>{formatCount()}</span>
+      <button onClick={handleIncrement} className="btn btn-secondary btn-md">
+        Increment
+      </button>
     </div>
   );
+
+  function getBadgeClasses() {
+    let classes = "badge m-2 badge-";
+    classes += count === 0 ? "warning" : "primary";
+    return classes;
+  }
 }
 
 export default App;
