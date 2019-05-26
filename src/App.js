@@ -2,7 +2,8 @@ import React from "react";
 
 function App() {
   const state = {
-    count: 1
+    count: 1,
+    tags: ["tag1", "tag2", "tag3"]
   };
 
   function formatCount() {
@@ -16,6 +17,11 @@ function App() {
       <button style={{ fontSize: 20 }} className="btn btn-secondary btn-md">
         Increment
       </button>
+      <ul>
+        {state.tags.map(tag => (
+          <li key={tag}>{tag}</li>
+        ))}
+      </ul>
     </div>
   );
 
