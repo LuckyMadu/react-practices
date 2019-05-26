@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 
-function Counter() {
-  const [count, setCount] = useState(0);
-  const [product] = useState();
+function Counter(props) {
+  const [value, setCount] = useState(props.value);
 
   function formatCount() {
-    return count === 0 ? "zero" : count;
+    return value === 0 ? "zero" : value;
   }
 
-  const handleIncrement = product => {
-    console.log(product);
-    setCount(count + 1);
+  const handleIncrement = () => {
+    setCount(value + 1);
   };
 
   /* const doHandleIncrement = () => {
@@ -21,7 +19,7 @@ function Counter() {
     <div>
       <span className={getBadgeClasses()}>{formatCount()}</span>
       <button
-        onClick={() => handleIncrement(product)}
+        onClick={() => handleIncrement}
         className="btn btn-secondary btn-md"
       >
         Increment
@@ -31,7 +29,7 @@ function Counter() {
 
   function getBadgeClasses() {
     let classes = "badge m-2 badge-";
-    classes += count === 0 ? "warning" : "primary";
+    classes += value === 0 ? "warning" : "primary";
     return classes;
   }
 }
