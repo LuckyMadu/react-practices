@@ -21,10 +21,13 @@ function Counter(props) {
       {/*  <h4>Counter #{props.id}</h4> */}
       <span className={getBadgeClasses()}>{formatCount()}</span>
       <button
-        onClick={() => handleIncrement}
+        onClick={() => handleIncrement()}
         className="btn btn-secondary btn-md"
       >
         Increment
+      </button>
+      <button onClick={props.onDelete} className="btn btn-danger btn-sm m-2">
+        Delete
       </button>
     </div>
   );
