@@ -1,15 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 
 function Counter(props) {
-  const [value, setCount] = useState(props.counter.value);
-
   function formatCount() {
-    return value === 0 ? "zero" : value;
+    return props.counter.value === 0 ? "zero" : props.counter.value;
   }
-
-  const handleIncrement = () => {
-    setCount(value + 1);
-  };
 
   /* const doHandleIncrement = () => {
     handleIncrement({ id: 1 });
@@ -21,7 +15,7 @@ function Counter(props) {
       {/*  <h4>Counter #{props.counter.id}</h4> */}
       <span className={getBadgeClasses()}>{formatCount()}</span>
       <button
-        onClick={() => handleIncrement()}
+        onClick={() => props.onIncrement(props.counter)}
         className="btn btn-secondary btn-md"
       >
         Increment
@@ -37,7 +31,7 @@ function Counter(props) {
 
   function getBadgeClasses() {
     let classes = "badge m-2 badge-";
-    classes += value === 0 ? "warning" : "primary";
+    classes += props.counter.value === 0 ? "warning" : "primary";
     return classes;
   }
 }
