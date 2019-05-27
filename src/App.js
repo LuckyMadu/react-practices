@@ -1,38 +1,73 @@
-import React, { useState } from "react";
-
-function App() {
-  const [count, setCount] = useState(0);
-  const [product] = useState();
-
-  function formatCount() {
-    return count === 0 ? "zero" : count;
-  }
-
-  const handleIncrement = product => {
-    console.log(product);
-    setCount(count + 1);
+import React, { Component } from "react";
+import Counters from "./components/counters";
+import Navbar from "./components/navbar";
+class App extends Component {
+  state = {
+    counters: [
+      {
+        id: 1,
+        value: 4
+      },
+      {
+        id: 2,
+        value: 0
+      },
+      {
+        id: 3,
+        value: 0
+      },
+      {
+        id: 4,
+        value: 0
+      }
+    ]
   };
 
-  /* const doHandleIncrement = () => {
-    handleIncrement({ id: 1 });
-  }; */
+  handleIncrement = counter => {
+    //console.log(counter);
+    const counters = [...this.state.counters];
+    const index = counters.indexOf(counter);
+    counters[index] = { ...counter };
+    counters[index].value++;
+    //console.log(this.state.counters[index]);
+    this.setState({
+      counters
+    });
+  };
 
-  return (
-    <div>
-      <span className={getBadgeClasses()}>{formatCount()}</span>
-      <button
-        onClick={() => handleIncrement(product)}
-        className="btn btn-secondary btn-md"
-      >
-        Increment
-      </button>
-    </div>
-  );
+  handleReset = () => {
+    const counters = this.state.counters.map(c => {
+      c.value = 0;
+      return c;
+    });
+    this.setState({
+      counters
+    });
+  };
 
-  function getBadgeClasses() {
-    let classes = "badge m-2 badge-";
-    classes += count === 0 ? "warning" : "primary";
-    return classes;
+  handleDelete = counterId => {
+    //console.log("Event Handler Called!", counterId);
+    const counters = this.state.counters.filter(c => c.id !== counterId);
+    this.setState({
+      counters
+    });
+  };
+  render() {
+    return (
+      <div>
+        <Navbar
+          totalCounters={this.state.counters.filter(c => c.value > 0).length}
+        />
+        <main className="container">
+          <Counters
+            counters={this.state.counters}
+            onReset={this.handleReset}
+            onIncrement={this.handleIncrement}
+            onDelete={this.handleDelete}
+          />
+        </main>
+      </div>
+    );
   }
 }
 
