@@ -8,7 +8,7 @@ function Counter(props) {
   /* const doHandleIncrement = () => {
     handleIncrement({ id: 1 });
   }; */
-
+  console.log('Counter-Rendered')
   return (
     <div>
       {props.children}

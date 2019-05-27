@@ -23,6 +23,15 @@ class App extends Component {
     ]
   };
 
+  constructor() {
+    super();
+    console.log("App-Constructor");
+  }
+
+  componentDidMount() {
+    console.log('App-Mounted')
+  }
+
   handleIncrement = counter => {
     //console.log(counter);
     const counters = [...this.state.counters];
@@ -53,6 +62,7 @@ class App extends Component {
     });
   };
   render() {
+    console.log('App-Rendered')
     return (
       <div>
         <Navbar
