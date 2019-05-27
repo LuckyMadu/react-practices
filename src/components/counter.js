@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 function Counter(props) {
-  const [value, setCount] = useState(props.value);
+  const [value, setCount] = useState(props.counter.value);
 
   function formatCount() {
     return value === 0 ? "zero" : value;
@@ -18,7 +18,7 @@ function Counter(props) {
   return (
     <div>
       {props.children}
-      {/*  <h4>Counter #{props.id}</h4> */}
+      {/*  <h4>Counter #{props.counter.id}</h4> */}
       <span className={getBadgeClasses()}>{formatCount()}</span>
       <button
         onClick={() => handleIncrement()}
@@ -26,7 +26,10 @@ function Counter(props) {
       >
         Increment
       </button>
-      <button onClick={props.onDelete} className="btn btn-danger btn-sm m-2">
+      <button
+        onClick={() => props.onDelete(props.counter.id)}
+        className="btn btn-danger btn-sm m-2"
+      >
         Delete
       </button>
     </div>
